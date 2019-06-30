@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/loading_layout" />
+
+        <FrameLayout
+            android:id="@+id/flContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <View style="@style/LineHorizontal" />
+
+        <LinearLayout
+            android:id="@+id/llFooter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.dz.customizes.views.footers.FooterItem
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:footerItemContent="@string/home"
+                app:footerItemIcon="@mipmap/ic_launcher" />
+
+            <com.dz.customizes.views.footers.FooterItem
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:footerItemContent="@string/home"
+                app:footerItemIcon="@mipmap/ic_launcher" />
+
+            <com.dz.customizes.views.footers.FooterItem
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:footerItemContent="@string/home"
+                app:footerItemIcon="@mipmap/ic_launcher" />
+
+            <com.dz.customizes.views.footers.FooterItem
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:footerItemContent="@string/home"
+                app:footerItemIcon="@mipmap/ic_launcher" />
+
+            <com.dz.customizes.views.footers.FooterItem
+                android:id="@+id/fiHome"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:footerItemContent="@string/home"
+                app:footerItemIcon="@mipmap/ic_launcher" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/network_layout" />
+</merge>
