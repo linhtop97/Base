@@ -1,4 +1,4 @@
-package vn.com.misa.base.views
+package vn.com.misa.base.commons.views
 
 import android.view.View
 import androidx.annotation.LayoutRes

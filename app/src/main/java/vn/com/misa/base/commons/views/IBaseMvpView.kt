@@ -1,4 +1,4 @@
-package vn.com.misa.base.views
+package vn.com.misa.base.commons.views
 
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable

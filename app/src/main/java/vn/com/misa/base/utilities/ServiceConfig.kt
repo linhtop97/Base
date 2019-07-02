@@ -19,5 +19,7 @@ class ServiceConfig {
         const val CLIENT_ID = 1
 
         const val SIGN_IN = "api/v1/auth/login"
+
+        const val SOME_THING = "api/v1/auth/{language}/company"
     }
 }
