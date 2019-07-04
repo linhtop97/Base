@@ -8,6 +8,7 @@ import vn.com.base.libraries.rxbus.RxBus
 import vn.com.base.libraries.utilities.NetworkUtility
 import vn.com.base.libraries.utilities.TypefaceUtility
 import vn.com.base.libraries.views.recyclerviews.ExtRecyclerView
+import vn.com.misa.base.di.AppComponent
 import vn.com.misa.base.models.responses.TokenResponse
 import vn.com.misa.base.utilities.Constant
 import javax.inject.Inject
@@ -30,8 +31,19 @@ class AppContext : ExtApplication() {
             }
         }
 
+        fun getTokenType(): String {
+            return ""
+        }
+
+        fun getAccessToken(): String {
+            return tokenResponse?.accessToken ?: ""
+        }
+
 
     }
+
+    // application component
+    lateinit var appComponent: AppComponent
 
     @Inject
     lateinit var rxBus: RxBus<IEvent>
@@ -39,6 +51,11 @@ class AppContext : ExtApplication() {
     override fun onCreate() {
         super.onCreate()
 
+//        appComponent = DaggerAppComponent
+//            .builder()
+//            .appModule(AppModule(this))
+//            .build()
+//        appComponent.inject(this)
         // paging number per page
         ExtRecyclerView.numberPerPage = Constant.NUMBER_PER_PAGE
 

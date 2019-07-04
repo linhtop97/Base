@@ -5,20 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import vn.com.base.libraries.R
 import vn.com.base.libraries.utilities.CollectionUtility
-import vn.com.base.libraries.utilities.OptionalUtility
 
-abstract class ExtRecyclerViewAdapter<T, VH : ExtRecyclerViewHolder>(ctx: Context, its: ArrayList<T?>? = null)
-    : RecyclerView.Adapter<ExtRecyclerViewHolder>() {
-    companion object {
-        private const val TYPE_ITEM = 0
-        private const val TYPE_LOADING = 1
-    }
+abstract class ExtRecyclerViewAdapter<T, VH : ExtRecyclerViewHolder>(ctx: Context, its: ArrayList<T?>? = null) :
+    RecyclerView.Adapter<VH>() {
 
     protected var context: Context = ctx
     private var layoutInflater: LayoutInflater = LayoutInflater.from(ctx)
-    private var items: ArrayList<T?>? = its
+    protected var items: ArrayList<T?>? = its
 
     private var loadingId: Int = 0
 
@@ -26,7 +20,7 @@ abstract class ExtRecyclerViewAdapter<T, VH : ExtRecyclerViewHolder>(ctx: Contex
      * @param viewType
      * @return
      */
-    protected abstract fun getLayoutId(viewType: Int): Int
+    protected abstract fun getLayoutViewId(viewType: Int): Int
 
     /**
      * @param view
@@ -35,40 +29,12 @@ abstract class ExtRecyclerViewAdapter<T, VH : ExtRecyclerViewHolder>(ctx: Contex
      */
     protected abstract fun onCreateHolder(view: View, viewType: Int): VH
 
-    /**
-     * @param holder
-     * @param data
-     * @param position
-     */
-    protected abstract fun onBindViewHolder(holder: VH, data: T?, position: Int)
 
-    /**
-     * @param position
-     * @return
-     */
-    override fun getItemViewType(position: Int): Int {
-        return if (getItem(position) == null) TYPE_LOADING else TYPE_ITEM
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH =
+        onCreateHolder(layoutInflater.inflate(getLayoutViewId(viewType), parent, false), viewType)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExtRecyclerViewHolder {
-        return if (viewType == TYPE_ITEM) {
-            val view = layoutInflater.inflate(getLayoutId(viewType), parent, false)
-            onCreateHolder(view, viewType)
-        } else {
-            val view = layoutInflater.inflate(if (loadingId == 0) R.layout.loading_layout else loadingId, parent, false)
-            LoadingHolder(view)
-        }
-    }
+    private fun getViewHolder(viewType: Int) {
 
-    private fun getViewHolder(viewType: Int){
-
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    override fun onBindViewHolder(holder: ExtRecyclerViewHolder, position: Int) {
-        if (getItemViewType(position) == TYPE_ITEM && !OptionalUtility.isNullOrEmpty(getItem(position))) {
-            onBindViewHolder(holder as VH, getItem(position), position)
-        }
     }
 
     override fun getItemCount(): Int = CollectionUtility.with(items).size()
@@ -80,13 +46,6 @@ abstract class ExtRecyclerViewAdapter<T, VH : ExtRecyclerViewHolder>(ctx: Contex
         this.loadingId = loadingId
         return this
     }
-
-    /**
-     * get items
-     *
-     * @return
-     */
-    fun getItems(): ArrayList<T?>? = items
 
     /**
      * @param its
@@ -216,7 +175,7 @@ abstract class ExtRecyclerViewAdapter<T, VH : ExtRecyclerViewHolder>(ctx: Contex
     /**
      * loading holder
      */
-    private class LoadingHolder(itemView: View) : ExtRecyclerViewHolder(itemView)
+    public class LoadingHolder(itemView: View) : ExtRecyclerViewHolder(itemView)
 }
 
 
